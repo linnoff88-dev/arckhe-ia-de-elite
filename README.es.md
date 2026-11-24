@@ -8,7 +8,7 @@ IA de Élite es una guía con los 7 hábitos que separan a quien usa la IA de ve
 
 ## 📖 Guía de uso
 
-Guía completa (landing + paso a paso): **https://inematds.github.io/ia-de-elite/guia/es/**
+Guía completa (landing + paso a paso): **https://linnoff88-dev.github.io/
 
 ## Los 7 hábitos
 
@@ -37,7 +37,7 @@ kit/
 ## Inicio rápido
 
 ```bash
-git clone https://github.com/inematds/ia-de-elite.git && cd ia-de-elite
+git clone https://github.com/linnoff88-dev/ia-de-elite.git && cd ia-de-elite
 bash kit/testes/rodar.sh                          # 30 ok · 0 falha(s)
 python3 kit/scripts/reuniao.py --simular --saida teste-reuniao
 bash kit/instalar.sh --dry-run                    # después sin --dry-run
@@ -46,4 +46,4 @@ bash kit/instalar.sh --dry-run                    # después sin --dry-run
 - **reuniao.py**: audio/video (o .txt/.srt) → `transcricao.txt`, `ata.md`, `tarefas.md`. Transcribe **en tu computadora** con faster-whisper (`pip install faster-whisper`). El acta sale por `claude -p` (suscripción de Claude Code), por Ollama local o como prompt para pegar en cualquier chat (`--motor prompt`). Nunca llama a una API de pago.
 - **ditado.sh** (Linux): graba, transcribe en local y copia el texto. Windows: `Win + H`. macOS: `Fn` dos veces.
 
-Abierto y gratuito · licencia MIT · [INEMA.CLUB](https://inema.club)
+Abierto y gratuito · licencia MIT · [ARCKHÉ AI](https://ARCKHÉ AI)

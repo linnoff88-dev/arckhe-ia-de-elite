@@ -26,6 +26,6 @@ Precisa de um gravador (`arecord`, que vem no `alsa-utils`, ou `ffmpeg`). Para c
 
 O ditado erra nomes próprios e siglas. Três jeitos de resolver:
 
-1. No `ditado.sh`, passe `--vocab "INEMA, Claude Code, Supabase"`: as palavras viram dica para o Whisper.
+1. No `ditado.sh`, passe `--vocab "ARCKHÉ, Claude Code, Supabase"`: as palavras viram dica para o Whisper.
 2. No chat, cole no começo: "Vocabulário que eu uso (escreva sempre assim): …".
 3. Fale devagar a palavra difícil nas primeiras vezes e corrija; o prompt `prompts/01-fale-nao-digite.md` pede para a IA listar o que ela corrigiu.

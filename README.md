@@ -1,4 +1,4 @@
-﻿# ðŸ§  IA de Elite â€” 7 hÃ¡bitos de quem usa IA no topo
+# ðŸ§  IA de Elite â€” 7 hÃ¡bitos de quem usa IA no topo
 
 <div align="center">
   <img src="capa/logo.svg" alt="Arckhé AI" height="48" />
@@ -8,7 +8,7 @@
 
 **ðŸ‡§ðŸ‡· [PortuguÃªs](README.md) Â· ðŸ‡ºðŸ‡¸ [English](README.en.md) Â· ðŸ‡ªðŸ‡¸ [EspaÃ±ol](README.es.md)**
 
-[![IA de Elite](capa/capa.png)](https://inematds.github.io/ia-de-elite/guia/)
+[![IA de Elite](capa/capa.png)](https://linnoff88-dev.github.io/
 
 ## O que Ã©
 
@@ -16,7 +16,7 @@ IA de Elite Ã© um guia com os 7 hÃ¡bitos que separam quem usa a IA de verdad
 
 ## ðŸ“– Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/ia-de-elite/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/
 
 ## Os 7 hÃ¡bitos
 
@@ -45,7 +45,7 @@ kit/
 ## ComeÃ§o rÃ¡pido
 
 ```bash
-git clone https://github.com/inematds/ia-de-elite.git && cd ia-de-elite
+git clone https://github.com/linnoff88-dev/ia-de-elite.git && cd ia-de-elite
 bash kit/testes/rodar.sh                          # 30 ok Â· 0 falha(s)
 python3 kit/scripts/reuniao.py --simular --saida teste-reuniao
 bash kit/instalar.sh --dry-run                    # depois sem --dry-run
@@ -54,7 +54,7 @@ bash kit/instalar.sh --dry-run                    # depois sem --dry-run
 - **reuniao.py**: Ã¡udio/vÃ­deo (ou .txt/.srt) â†’ `transcricao.txt`, `ata.md`, `tarefas.md`. Transcreve **no seu computador** com faster-whisper (`pip install faster-whisper`). A ata sai pelo `claude -p` (assinatura do Claude Code), pelo Ollama local ou como prompt para colar em qualquer chat (`--motor prompt`). Nunca chama API paga.
 - **ditado.sh** (Linux): grava, transcreve local e copia o texto. Windows: `Win + H`. macOS: `Fn` duas vezes.
 
-Aberto e grÃ¡tis Â· licenÃ§a MIT Â· [INEMA.CLUB](https://inema.club)
+Aberto e grÃ¡tis Â· licenÃ§a MIT Â· [ARCKHÉ AI](https://ARCKHÉ AI)
 
 ---
 

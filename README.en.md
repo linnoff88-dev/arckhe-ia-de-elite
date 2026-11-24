@@ -8,7 +8,7 @@ Elite AI is a guide to the 7 habits that separate people who really use AI from 
 
 ## 📖 User guide
 
-Full guide (landing page + step by step): **https://inematds.github.io/ia-de-elite/guia/en/**
+Full guide (landing page + step by step): **https://linnoff88-dev.github.io/
 
 ## The 7 habits
 
@@ -37,7 +37,7 @@ kit/
 ## Quick start
 
 ```bash
-git clone https://github.com/inematds/ia-de-elite.git && cd ia-de-elite
+git clone https://github.com/linnoff88-dev/ia-de-elite.git && cd ia-de-elite
 bash kit/testes/rodar.sh                          # 30 ok · 0 falha(s)
 python3 kit/scripts/reuniao.py --simular --saida teste-reuniao
 bash kit/instalar.sh --dry-run                    # then without --dry-run
@@ -46,4 +46,4 @@ bash kit/instalar.sh --dry-run                    # then without --dry-run
 - **reuniao.py**: audio/video (or .txt/.srt) → `transcricao.txt`, `ata.md`, `tarefas.md`. It transcribes **on your computer** with faster-whisper (`pip install faster-whisper`). The minutes come out through `claude -p` (Claude Code subscription), through local Ollama, or as a prompt to paste into any chat (`--motor prompt`). It never calls a paid API.
 - **ditado.sh** (Linux): records, transcribes locally and copies the text. Windows: `Win + H`. macOS: press `Fn` twice.
 
-Open and free · MIT license · [INEMA.CLUB](https://inema.club)
+Open and free · MIT license · [ARCKHÉ AI](https://ARCKHÉ AI)

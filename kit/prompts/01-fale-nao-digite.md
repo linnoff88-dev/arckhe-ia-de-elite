@@ -22,5 +22,5 @@ Só depois disso, faça o que eu pedi.
 Nomes próprios, siglas e termos da sua área o ditado erra. Mantenha uma lista e cole no começo da conversa:
 
 ```text
-Vocabulário que eu uso (escreva sempre assim): INEMA, Claude Code, Supabase, n8n, MCP, <seus termos>.
+Vocabulário que eu uso (escreva sempre assim): ARCKHÉ, Claude Code, Supabase, n8n, MCP, <seus termos>.
 ```
