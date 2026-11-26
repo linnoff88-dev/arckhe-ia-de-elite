@@ -10,7 +10,7 @@ Quero [o que você quer fazer]. Antes de fazer qualquer coisa, me entreviste.
 - Uma pergunta por vez, esperando a minha resposta.
 - Comece pelas perguntas que mais mudam o resultado.
 - Quando eu disser "chega" ou quando você tiver o suficiente, resuma o que entendeu
-  em 5 linhas, peça minha confirmação e só então faça.
+  em 5 linhas, peça minha confirmaçêo e só entêo faça.
 ```
 
 Combina com o hábito 1: responda as perguntas falando.

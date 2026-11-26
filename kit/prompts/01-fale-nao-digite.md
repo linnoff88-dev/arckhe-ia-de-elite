@@ -1,4 +1,4 @@
-# Hábito 1 — Fale, não digite
+# Hábito 1 — Fale, nêo digite
 
 **Por quê:** digitando, a maioria das pessoas faz em média 30 a 50 palavras por minuto. Falando, em média 150 a 200. Você passa mais contexto para a IA no mesmo tempo, e contexto é o que faz a resposta ficar boa.
 
@@ -7,7 +7,7 @@
 ## Prompt (copie e cole)
 
 ```text
-Vou ditar por voz, então meu texto vai vir bagunçado, com repetições e frases soltas.
+Vou ditar por voz, entêo meu texto vai vir bagunçado, com repetições e frases soltas.
 Antes de responder:
 1. Organize o que eu disse em tópicos curtos (o que eu quero, o contexto, as restrições).
 2. Corrija palavras que o ditado provavelmente errou e me mostre a lista dessas correções.

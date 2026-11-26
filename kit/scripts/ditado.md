@@ -1,12 +1,12 @@
 # Ditado grátis — fale em vez de digitar
 
-Em média, a gente digita 30 a 50 palavras por minuto e fala 150 a 200. Todos os caminhos abaixo são grátis.
+Em média, a gente digita 30 a 50 palavras por minuto e fala 150 a 200. Todos os caminhos abaixo sêo grátis.
 
-| Onde | Como ativar | Observação |
+| Onde | Como ativar | Observaçêo |
 |---|---|---|
 | **Windows 10/11** | `Win + H` em qualquer campo de texto | Configurações › Hora e idioma › Fala para escolher o idioma. Diga "vírgula", "ponto". |
 | **macOS** | Ajustes › Teclado › Ditado: ligar. Depois aperte `Fn` duas vezes (ou a tecla de microfone) | Funciona em qualquer app, inclusive no navegador. |
-| **Google Docs** | Ferramentas › Digitação por voz (`Ctrl + Shift + S`) | Só no Chrome. Bom para textos longos, depois cole no chat. |
+| **Google Docs** | Ferramentas › Digitaçêo por voz (`Ctrl + Shift + S`) | Só no Chrome. Bom para textos longos, depois cole no chat. |
 | **Celular (Android/iPhone)** | Toque no microfone do teclado | O app do ChatGPT, do Claude e do Gemini também têm modo voz. |
 | **Linux** | `bash kit/scripts/ditado.sh` (faster-whisper local) | Grava, transcreve no seu computador e copia o texto. |
 

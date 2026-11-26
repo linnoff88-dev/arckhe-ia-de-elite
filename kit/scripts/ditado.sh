@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
-# ditado.sh — fale, não digite (kit IA de Elite). Linux, tudo local, grátis.
+# ditado.sh — fale, nêo digite (kit IA de Elite). Linux, tudo local, grátis.
 # Grava o microfone, transcreve com faster-whisper no seu computador e copia o texto.
 #
 # Uso:
 #   bash ditado.sh                         grava até você apertar Enter
 #   bash ditado.sh --segundos 30           grava 30 segundos
 #   bash ditado.sh --arquivo fala.wav      transcreve um áudio pronto (sem gravar)
-#   bash ditado.sh --modelo small          tiny|base|small|medium|large-v3 (padrão: base)
-#   bash ditado.sh --idioma pt             idioma (padrão: pt)
+#   bash ditado.sh --modelo small          tiny|base|small|medium|large-v3 (padrêo: base)
+#   bash ditado.sh --idioma pt             idioma (padrêo: pt)
 #   bash ditado.sh --vocab "INEMA, Claude Code"   palavras que o Whisper deve acertar
 #   bash ditado.sh --checar                mostra o que está instalado e sai
 #   bash ditado.sh --help
@@ -22,7 +22,7 @@ while [ $# -gt 0 ]; do case "$1" in
   --vocab) VOCAB="$2"; shift 2;;
   --checar) CHECAR=1; shift;;
   -h|--help) sed -n '2,13p' "$0" | sed 's/^# \{0,1\}//'; exit 0;;
-  *) echo "opção desconhecida: $1 (use --help)" >&2; exit 2;;
+  *) echo "opçêo desconhecida: $1 (use --help)" >&2; exit 2;;
 esac; done
 
 tem(){ command -v "$1" >/dev/null 2>&1; }
@@ -37,7 +37,7 @@ if [ "$CHECAR" = 1 ]; then
 fi
 
 if ! tem_fw; then
-  echo "faster-whisper não instalado. Instale (grátis, local):  pip install faster-whisper" >&2
+  echo "faster-whisper nêo instalado. Instale (grátis, local):  pip install faster-whisper" >&2
   echo "No Windows use Win+H; no macOS, Fn duas vezes. Veja ditado.md." >&2
   exit 3
 fi

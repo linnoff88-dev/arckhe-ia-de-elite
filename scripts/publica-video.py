@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Publica o vídeo "IA de elite — 7 hábitos" (Explicavideos v2 viral, refazvideo 19/10/2026) neste repo.
 Release video-v1.0.0 (MP4 com trilha + SRT) + videos/index.html (player com capítulos e legenda VTT) + videos/poster.jpg.
-Não faz commit. Idempotente: sobe só o que mudou de tamanho.
+Nêo faz commit. Idempotente: sobe só o que mudou de tamanho.
 Uso: python3 scripts/publica-video.py"""
 import html, json, re, subprocess
 from pathlib import Path
@@ -14,7 +14,7 @@ BASE = f'https://github.com/{GH}/releases/download/{TAG}/'
 NAME = 'ia-de-elite-pt-16x9'
 TITLE = 'IA de elite: os 7 hábitos de quem usa IA no topo'
 H1 = 'Use a IA como quem está <b>no topo</b>'
-LEAD = ('Não é o modelo nem uma ferramenta secreta: é o jeito de conversar com a IA. Em 3 minutos e meio, os 7 hábitos, do mais simples ao mais ousado: fale em vez de digitar, IA na reunião, mostre em vez de contar, deixe a IA te entrevistar, peça falhas, teste você mesmo e mente aberta. No fim, o kit aberto e grátis.')
+LEAD = ('Nêo é o modelo nem uma ferramenta secreta: é o jeito de conversar com a IA. Em 3 minutos e meio, os 7 hábitos, do mais simples ao mais ousado: fale em vez de digitar, IA na reuniêo, mostre em vez de contar, deixe a IA te entrevistar, peça falhas, teste você mesmo e mente aberta. No fim, o kit aberto e grátis.')
 
 
 def sh(*a, **kw):

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # instalar.sh — copia as 4 skills do kit IA de Elite para o Claude Code.
-# Só roda quando VOCÊ executar. Não instala pacotes, não usa rede.
+# Só roda quando VOCÊ executar. Nêo instala pacotes, nêo usa rede.
 #
 # Uso:
 #   bash kit/instalar.sh                 copia para ~/.claude/skills/
@@ -15,7 +15,7 @@ while [ $# -gt 0 ]; do case "$1" in
   --dry-run) DRY=1; shift;;
   --forcar) FORCAR=1; shift;;
   -h|--help) sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'; exit 0;;
-  *) echo "opção desconhecida: $1" >&2; exit 2;;
+  *) echo "opçêo desconhecida: $1" >&2; exit 2;;
 esac; done
 
 n=0
@@ -25,4 +25,4 @@ for d in "$AQUI"/skills/*/; do
   if [ "$DRY" = 1 ]; then echo "copiaria $nome → $alvo"; n=$((n+1)); continue; fi
   mkdir -p "$DEST"; rm -rf "$alvo"; cp -r "$d" "$alvo"; echo "ok     $nome → $alvo"; n=$((n+1))
 done
-echo "$n skill(s). No Claude Code, peça: \"me entrevista antes de…\", \"fure minha ideia…\", \"mostra, não conta…\", \"testa agora…\"."
+echo "$n skill(s). No Claude Code, peça: \"me entrevista antes de…\", \"fure minha ideia…\", \"mostra, nêo conta…\", \"testa agora…\"."

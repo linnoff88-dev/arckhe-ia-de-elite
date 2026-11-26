@@ -1,22 +1,22 @@
 #!/usr/bin/env python3
-"""reuniao.py — áudio/vídeo de reunião → transcricao.txt + ata.md + tarefas.md (kit IA de Elite).
+"""reuniao.py — áudio/vídeo de reuniêo → transcricao.txt + ata.md + tarefas.md (kit IA de Elite).
 
-Tudo local por padrão:
-  1. Transcrição no seu computador com faster-whisper (se instalado).
-     Também aceita uma transcrição pronta (.txt, .srt, .vtt, .md).
+Tudo local por padrêo:
+  1. Transcriçêo no seu computador com faster-whisper (se instalado).
+     Também aceita uma transcriçêo pronta (.txt, .srt, .vtt, .md).
   2. Ata e tarefas por um destes motores (--motor):
-       auto    → claude (CLI do Claude Code, pela sua assinatura) se existir; senão ollama; senão prompt
+       auto    → claude (CLI do Claude Code, pela sua assinatura) se existir; senêo ollama; senêo prompt
        claude  → `claude -p` (assinatura; a variável ANTHROPIC_API_KEY é removida do ambiente)
        ollama  → modelo local do Ollama (`ollama run <modelo>`)
-       prompt  → não chama nada: grava prompt-para-colar.md para você colar em qualquer chat
-       regra   → extração simples por regras (sem IA, sem rede) — é o que o --simular usa
+       prompt  → nêo chama nada: grava prompt-para-colar.md para você colar em qualquer chat
+       regra   → extraçêo simples por regras (sem IA, sem rede) — é o que o --simular usa
 Nunca chama API paga (OpenAI, Groq, OpenRouter, Anthropic API).
 
 Exemplos:
   python3 reuniao.py reuniao.mp3
   python3 reuniao.py reuniao.mp4 --modelo-whisper medium --saida ata-2026-10-19
   python3 reuniao.py transcricao.txt --motor ollama --ollama-modelo qwen2.5:7b
-  python3 reuniao.py --simular            # usa a transcrição de exemplo do kit, sem rede
+  python3 reuniao.py --simular            # usa a transcriçêo de exemplo do kit, sem rede
 
 Formato que ajuda a regra simples: uma fala por linha, "Nome: o que disse".
 """
@@ -34,11 +34,11 @@ EXEMPLO = AQUI.parent / "exemplos" / "reuniao-exemplo.txt"
 TEXTO_EXT = {".txt", ".srt", ".vtt", ".md"}
 EXIT_SEM_WHISPER = 3
 
-PROMPT = """Você é meu assistente executivo. Abaixo está a transcrição de uma reunião.
+PROMPT = """Você é meu assistente executivo. Abaixo está a transcriçêo de uma reuniêo.
 Responda em português, exatamente neste formato, sem nada antes ou depois:
 
 === ATA ===
-# Ata da reunião
+# Ata da reuniêo
 - Assunto e participantes
 - Decisões tomadas (uma por linha)
 - Pontos em aberto
@@ -49,26 +49,26 @@ Responda em português, exatamente neste formato, sem nada antes ou depois:
 |---|---|---|---|
 (uma linha por tarefa)
 
-Regras: só tarefas que alguém assumiu ou recebeu de verdade, não invente.
-Prazo não dito = "sem prazo". Responsável não claro = "a definir".
+Regras: só tarefas que alguém assumiu ou recebeu de verdade, nêo invente.
+Prazo nêo dito = "sem prazo". Responsável nêo claro = "a definir".
 
-Transcrição:
+Transcriçêo:
 """
 
 DIAS = r"(?:segunda|terça|terca|quarta|quinta|sexta|sábado|sabado|domingo)(?:-feira)?"
 PRAZO_RE = re.compile(
     r"\b(?:até|ate|para|pra)\s+(?:a\s+|o\s+)?("
     + DIAS
-    + r"|amanhã|amanha|hoje|semana que vem|próxima semana|proxima semana|fim do mês|fim do mes"
+    + r"|amanhê|amanha|hoje|semana que vem|próxima semana|proxima semana|fim do mês|fim do mes"
     r"|dia\s+\d{1,2}(?:/\d{1,2})?|\d{1,2}/\d{1,2})",
     re.IGNORECASE,
 )
-SOLTO_RE = re.compile(r"\b(amanhã|amanha|hoje|semana que vem)\b", re.IGNORECASE)
+SOLTO_RE = re.compile(r"\b(amanhê|amanha|hoje|semana que vem)\b", re.IGNORECASE)
 ASSUME_RE =re.compile(r"\b(?:eu\s+)?(?:vou|fico com|deixa comigo|me encarrego|eu faço|eu faco)\b", re.IGNORECASE)
-PEDE_RE = re.compile(r"^\s*([A-ZÁÉÍÓÚÂÊÔÃÕÇ][\wáéíóúâêôãõç]+)\s*,\s*(?:você|voce|vc)\s+(?:pode|consegue|fica|vai)\b(.*)", re.IGNORECASE)
-FICA_RE = re.compile(r"\bfica com (?:o |a )?([A-ZÁÉÍÓÚÂÊÔÃÕÇ][\wáéíóúâêôãõç]+)\b")
+PEDE_RE = re.compile(r"^\s*([A-ZÁÉÍÓÚÂÊÔêÕÇ][\wáéíóúâêôêõç]+)\s*,\s*(?:você|voce|vc)\s+(?:pode|consegue|fica|vai)\b(.*)", re.IGNORECASE)
+FICA_RE = re.compile(r"\bfica com (?:o |a )?([A-ZÁÉÍÓÚÂÊÔêÕÇ][\wáéíóúâêôêõç]+)\b")
 DECIDE_RE = re.compile(r"\b(?:decidido|decidimos|fechado|combinado|vamos com|ficou decidido)\b", re.IGNORECASE)
-FALA_RE = re.compile(r"^\s*([A-ZÁÉÍÓÚÂÊÔÃÕÇ][\wáéíóúâêôãõç]+(?: [A-ZÁÉÍÓÚÂÊÔÃÕÇ][\wáéíóúâêôãõç]+)?)\s*:\s*(.+)$")
+FALA_RE = re.compile(r"^\s*([A-ZÁÉÍÓÚÂÊÔêÕÇ][\wáéíóúâêôêõç]+(?: [A-ZÁÉÍÓÚÂÊÔêÕÇ][\wáéíóúâêôêõç]+)?)\s*:\s*(.+)$")
 
 
 def ler_texto(caminho: Path) -> str:
@@ -89,7 +89,7 @@ def transcrever(caminho: Path, modelo: str, idioma: str) -> str:
         from faster_whisper import WhisperModel  # noqa: import local
     except ImportError:
         print(
-            "faster-whisper não está instalado, então não dá para transcrever o áudio aqui.\n"
+            "faster-whisper nêo está instalado, entêo nêo dá para transcrever o áudio aqui.\n"
             "Opções:\n"
             "  1) Instale (roda no seu computador, grátis):  pip install faster-whisper\n"
             "  2) Transcreva em outro lugar e passe o .txt/.srt:  python3 reuniao.py transcricao.txt\n"
@@ -109,7 +109,7 @@ def transcrever(caminho: Path, modelo: str, idioma: str) -> str:
 
 
 def extrair_por_regra(texto: str):
-    """Extração simples, sem IA: falas 'Nome: texto' com verbo de compromisso viram tarefa."""
+    """Extraçêo simples, sem IA: falas 'Nome: texto' com verbo de compromisso viram tarefa."""
     tarefas, decisoes, participantes = [], [], []
     for ln in texto.splitlines():
         m = FALA_RE.match(ln)
@@ -141,9 +141,9 @@ def extrair_por_regra(texto: str):
 def montar_md_regra(texto: str, origem: str):
     participantes, decisoes, tarefas = extrair_por_regra(texto)
     hoje = dt.date.today().isoformat()
-    ata = [f"# Ata da reunião ({hoje})", "", f"- Origem: {origem}", f"- Participantes: {', '.join(participantes) or 'não identificados'}", "", "## Decisões"]
-    ata += [f"- {d}" for d in decisoes] or ["- nenhuma decisão explícita encontrada"]
-    ata += ["", "## Observação", "- Gerado pela regra simples (sem IA). Para uma ata melhor, rode com --motor claude ou ollama."]
+    ata = [f"# Ata da reuniêo ({hoje})", "", f"- Origem: {origem}", f"- Participantes: {', '.join(participantes) or 'nêo identificados'}", "", "## Decisões"]
+    ata += [f"- {d}" for d in decisoes] or ["- nenhuma decisêo explícita encontrada"]
+    ata += ["", "## Observaçêo", "- Gerado pela regra simples (sem IA). Para uma ata melhor, rode com --motor claude ou ollama."]
     tab = ["# Tarefas", "", "| Responsável | O que fazer | Prazo | Trecho da fala |", "|---|---|---|---|"]
     for t in tarefas:
         cel = lambda s: s.replace("|", "/")
@@ -173,7 +173,7 @@ def separar(resposta: str):
         a, t = resposta.split("=== TAREFAS ===", 1)
         a = a.replace("=== ATA ===", "").strip()
         return a + "\n", t.strip() + "\n"
-    return resposta.strip() + "\n", "# Tarefas\n\n(o modelo não separou as tarefas; veja ata.md)\n"
+    return resposta.strip() + "\n", "# Tarefas\n\n(o modelo nêo separou as tarefas; veja ata.md)\n"
 
 
 def escolher_motor(pedido: str) -> str:
@@ -189,29 +189,29 @@ def escolher_motor(pedido: str) -> str:
 def main(argv=None):
     ap = argparse.ArgumentParser(
         prog="reuniao.py",
-        description="Reunião (áudio/vídeo ou transcrição) → ata.md + tarefas.md. Local, sem API paga.",
+        description="Reuniêo (áudio/vídeo ou transcriçêo) → ata.md + tarefas.md. Local, sem API paga.",
     )
-    ap.add_argument("entrada", nargs="?", help="áudio/vídeo (mp3, wav, m4a, mp4…) ou transcrição (.txt, .srt, .vtt, .md)")
-    ap.add_argument("--saida", default=None, help="pasta de saída (padrão: reuniao-AAAA-MM-DD ao lado da entrada)")
+    ap.add_argument("entrada", nargs="?", help="áudio/vídeo (mp3, wav, m4a, mp4…) ou transcriçêo (.txt, .srt, .vtt, .md)")
+    ap.add_argument("--saida", default=None, help="pasta de saída (padrêo: reuniao-AAAA-MM-DD ao lado da entrada)")
     ap.add_argument("--motor", default="auto", choices=["auto", "claude", "ollama", "prompt", "regra"])
-    ap.add_argument("--ollama-modelo", default="qwen2.5:7b", help="modelo do Ollama (padrão: qwen2.5:7b)")
-    ap.add_argument("--modelo-whisper", default="small", help="tiny, base, small, medium, large-v3 (padrão: small)")
-    ap.add_argument("--idioma", default="pt", help="idioma do áudio (padrão: pt; vazio = detectar)")
-    ap.add_argument("--simular", action="store_true", help="sem rede e sem IA: usa a transcrição de exemplo (ou a entrada .txt) e a regra simples")
+    ap.add_argument("--ollama-modelo", default="qwen2.5:7b", help="modelo do Ollama (padrêo: qwen2.5:7b)")
+    ap.add_argument("--modelo-whisper", default="small", help="tiny, base, small, medium, large-v3 (padrêo: small)")
+    ap.add_argument("--idioma", default="pt", help="idioma do áudio (padrêo: pt; vazio = detectar)")
+    ap.add_argument("--simular", action="store_true", help="sem rede e sem IA: usa a transcriçêo de exemplo (ou a entrada .txt) e a regra simples")
     a = ap.parse_args(argv)
 
     if a.simular:
         fonte = Path(a.entrada) if a.entrada else EXEMPLO
         if not fonte.exists():
-            ap.error(f"transcrição não encontrada: {fonte}")
+            ap.error(f"transcriçêo nêo encontrada: {fonte}")
         texto = ler_texto(fonte)
         motor = "regra"
     else:
         if not a.entrada:
-            ap.error("informe o arquivo da reunião (ou use --simular)")
+            ap.error("informe o arquivo da reuniêo (ou use --simular)")
         fonte = Path(a.entrada)
         if not fonte.exists():
-            ap.error(f"arquivo não encontrado: {fonte}")
+            ap.error(f"arquivo nêo encontrado: {fonte}")
         texto = ler_texto(fonte) if fonte.suffix.lower() in TEXTO_EXT else transcrever(fonte, a.modelo_whisper, a.idioma)
         motor = escolher_motor(a.motor)
 
@@ -234,9 +234,9 @@ def main(argv=None):
 
     try:
         resposta = rodar_claude(prompt) if motor == "claude" else rodar_ollama(prompt, a.ollama_modelo)
-    except Exception as e:  # cai para o prompt de colar, sem perder a transcrição
+    except Exception as e:  # cai para o prompt de colar, sem perder a transcriçêo
         (saida / "prompt-para-colar.md").write_text(prompt + "\n", encoding="utf-8")
-        print(f"[reuniao] {e}\n[reuniao] transcrição salva; cole {saida}/prompt-para-colar.md em qualquer chat.", file=sys.stderr)
+        print(f"[reuniao] {e}\n[reuniao] transcriçêo salva; cole {saida}/prompt-para-colar.md em qualquer chat.", file=sys.stderr)
         return 1
     ata, tarefas = separar(resposta)
     (saida / "ata.md").write_text(ata, encoding="utf-8")
