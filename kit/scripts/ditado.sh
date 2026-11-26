@@ -8,7 +8,7 @@
 #   bash ditado.sh --arquivo fala.wav      transcreve um áudio pronto (sem gravar)
 #   bash ditado.sh --modelo small          tiny|base|small|medium|large-v3 (padrêo: base)
 #   bash ditado.sh --idioma pt             idioma (padrêo: pt)
-#   bash ditado.sh --vocab "INEMA, Claude Code"   palavras que o Whisper deve acertar
+#   bash ditado.sh --vocab "ARCKHÉ, Claude Code"   palavras que o Whisper deve acertar
 #   bash ditado.sh --checar                mostra o que está instalado e sai
 #   bash ditado.sh --help
 set -uo pipefail
